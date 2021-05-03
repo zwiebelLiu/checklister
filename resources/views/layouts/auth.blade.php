@@ -16,7 +16,7 @@
             <div class="card-group">
                 <div class="card p-4">
                     <div class="card-body">
-@yield('content')
+                        @yield('content')
                     </div>
                 </div>
             </div>
