@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     {
         //)) UserFactory::defi();
        /*
-        UUser::create([
+        User::create([
             'name'=>'Admin',
              'email'=>'admin@admin.com',
              'password'=>bcrypt('12345678'),
@@ -26,10 +26,13 @@ class UserSeeder extends Seeder
              ]);
 
        */
+        DB::table('users')->update(array('age'=>rand(0,30)));
+/*
         //User::factory(3)->create();
-
+      //  App\User::all()->random()->id,
         DB::table('users')->update([
-            'age'=>rand(0,30)
+            'age'=>random()
              ]);
+  */
     }
 }
