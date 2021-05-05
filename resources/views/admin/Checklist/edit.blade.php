@@ -28,7 +28,7 @@
 
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
+                    <button class="btn btn-sm btn-primary" type="submit"> {{__('Save Checklist')}}</button>
                 </div>
                 </form>
             </div>
@@ -37,11 +37,69 @@
                 @method('DELETE')
                 <button class="btn btn-sm btn-danger"
                         onclick="return confirm('{{__('Are u sure?')}}')"
-                        type="submit">{{__('Delete')}}</button>
+                        type="submit">{{__('Delete this Checklist')}}</button>
             </form>
 
         </div>
         </div>
+        <hr>
+
+            <div class="card">
+                <div class="card-header"> {{__('List of Tasks')}}</div>
+                <div class="card-body">
+                    <table class="table table-responsive-sm">
+                        <tbody>
+                        @foreach($checklist->task as $tasks)
+                        <tr>
+                            <td>{{$tasks->name}}</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" href="{{route('admin.checklists.tasks.edit',[$checklist,$tasks])}}">{{__('Edit')}}</a>
+                                <form style="display: inline;" action="{{route('admin.checklists.tasks.destroy',[$checklist,$tasks])}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-danger"
+                                            onclick="return confirm('{{__('Are u sure?')}}')"
+                                            type="submit">{{__('Delete this Task')}}</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <div class="card">
+        @if ($errors->storeTask->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->storeTask->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+            <div class="card-header">{{ __('Edit Task') }} </div>
+        <form action="{{route('admin.checklists.tasks.store',[$checklist])}}" method="POST">
+            @csrf
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="name">{{ __('Name')}}</label>
+                    <input value="{{old('name')}}" class="form-control" name="name" type="text" >
+                </div>
+                <div class="form-group">
+                    <label for="name">{{ __('Descrption')}}</label>
+                    <textarea name="description" class="form-control"  rows="5">{{old('description')}}</textarea>
+
+                </div>
+            </div>
+            <div class="card-footer">
+               <button class="btn btn-sm btn-primary" type="submit"> {{__('Save Task')}}</button>
+            </div>
+        </form>
     </div>
+   </div>
+
 </div>
 @endsection

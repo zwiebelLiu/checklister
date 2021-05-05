@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class ChecklistController extends Controller
 {
+    protected $errorBag='storeChecklist';
     /**
      * Display a listing of the resource.
      *
