@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateChecklistGroupRequest extends FormRequest
+class UpdatePagesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +24,8 @@ class UpdateChecklistGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>[
-                'required',
-                Rule::unique('checklist_groups')->ignore($this->checklist_group),
-                //->ignore(request('id')
-                //->ignore($request()->segment(3) ==>http://127.0.0.1:8000/amdin/checklist_groups/2/Edit
-            ],
+            'title'=>['required'],
+            'content'=>['required'],
         ];
     }
 }

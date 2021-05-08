@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdatePagesRequest;
 use App\Models\Page;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -10,42 +11,15 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-
-    public function index():View
-    {
-        $pages=Page::all();
-
-        return view('pages.index',compact('pages'));
-    }
-
-    public function create():View
-    {
-        return view('pages.create');
-    }
-
-    public function store(Request $request):RedirectResponse
-    {
-        return redirect()->route('pages.index');
-    }
-
-    public function show(Page $page):View
-    {
-        return view('{{modelVariable }}s.show',compact('pages'));
-    }
-
     public function edit(Page $page):View
     {
-       return view('{{modelVariable }}s.edit',compact('pages'));
-
+        return view('admin.pages.edit',compact('page'));
     }
 
-    public function update(Request $request, Page $page):RedirectResponse
+    public function update(UpdatePagesRequest $request, Page $page):RedirectResponse
     {
-       return redirect()->route('pages.index');
+        $page->update($request->validated());
+       return redirect()->route('admin.pages.edit',$page)->with('message',__('OK'));
     }
 
-    public function destroy(Page $page):RedirectResponse
-    {
-        return redirect()->route('pages.index');
-    }
 }
