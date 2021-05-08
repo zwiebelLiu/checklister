@@ -19,7 +19,7 @@
             </li>
         @foreach(\App\Models\ChecklistGroup::with('checklists')->get() as $group)
                 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown c-show">
-                    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle"
+                    <a class="c-sidebar-nav-link"
                        href="{{route('admin.checklist_group.edit',$group->id)}}">
                         <svg class="c-sidebar-nav-icon">
                             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-puzzle"></use>
