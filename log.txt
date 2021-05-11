@@ -1,0 +1,128 @@
+commit db3f546830a9a05b88078b5050d0cf01103a42e0
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Mon May 10 11:03:22 2021 +0200
+
+    1. Regist and  add Feld  'website' in user;
+    
+    2.creat Admin/UserController -->creat a userlist für admin
+    
+    3.View admin.user.index bauen.
+    
+    4.User::where('is_admin',0)->latest()->pageinate(5)
+     Blade: {{->links()}}
+    
+    5.change the style -->AppServiceProvider ->Paginator::userBootstrap()
+
+commit 4123a8cafcffd205583cc240c280381bee6494ed
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Sun May 9 22:42:28 2021 +0200
+
+    Part8
+    
+    1.Creat PageController -->welcome and consultation
+    2.Route Page soll mittelware('auth')
+    3.header editiert add consultation,welcome,Logout
+
+commit 7f7782d4509b2d177b7206a5cc66976713d92e73
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Sun May 9 00:03:10 2021 +0200
+
+    Part7
+    1.UpdateChecklistGroupRequest ---> Rule::unique('checklist_groups')->ignore(->checklist_group),
+    
+    2.create Page Table
+    
+    3.seeder: php artisan db:seed --class=PagesSeeder
+    
+    4. creat view pages edit ==>like task edit
+    
+    5.siderbar...> @foreach(\App\Models\Page::all() as )
+    
+    6.UpdatePagesRequest
+    
+    7.PagesController->update return -->with('message',__('OK')) is session('message') in blade
+    
+    8.Route::resource('pages', PageController::class)->only(['edit','update']);
+
+commit 986675866458021576d08a4338f920724cb85803
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Sat May 8 23:15:32 2021 +0200
+
+    Part 6 , umbau controller.model.stub  and create PagesControoler
+    php artisan make:Controller Admin\PagesController -r --model=Page --force
+
+commit 644314c51b49f596760a348ec4c4802d30f31596
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Wed May 5 16:22:30 2021 +0200
+
+    CKEditor
+
+commit ba507e89eaf69fbb6f16a83903d61b81ddeb206b
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Wed May 5 15:55:49 2021 +0200
+
+    creat Tasks
+    CURD Tasks
+
+commit 2b584b487c2c9a080034742055510fe38336dac3
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Tue May 4 14:54:01 2021 +0200
+
+    validated() ->storeRequest  && validate() ->Request diff
+
+commit 9866c938ff552f8144091ca205272637fbcf7b8b
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Tue May 4 13:54:04 2021 +0200
+
+    1.creat table checklists and Checklistgroup
+     checklist hat foreignID Checklist_group_id
+     add softDeletes() in mirgration and Model
+     Model\ChecklistGrooup hat function hasmany
+    
+    2. add Controller resourec  checklistsController and ChecklistgroupController
+    
+    3.edit siderbar.blade
+    
+    3.add Requests StoreChecklistGroupRequest
+     ->Authorize return true,
+     ->add rules ('name'=>['required','unique:checklist_groups'])
+    
+    4. Creat view  admin.Checklistgroup.create.blade.php
+           admin.Checklistgroup.edit.blade.php
+    
+    5.add ErrorMessage für blade
+    
+    6. Delete add js confirm
+    
+    7.resoure add checklist_group.checklists (URL:/admin/checklist_group/1/checklists/1/edit)
+    
+    8.bevor:update(Request )
+      After:update(StoreChecklistRequest , ChecklistGroup , Checklist )
+
+commit d18cfabed5acd69b6505b869d3ec97cddd34296c
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Mon May 3 13:45:15 2021 +0200
+
+    layout change, sidebar
+    add middleware is_admin
+    add new feld is_admin in table user
+    layout. page wird nur show bei admin
+    if(auth()->user()->isadmin
+    use seeder or factory to create fetch daten..
+
+commit 41cb67e2b4bacf705b18ea781a816001b9a7f45b
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Sat May 1 15:40:27 2021 +0200
+
+     add bootstrao ui -aut
+    get the CoreUI
+    search the SouceCode
+    Fail: ICON free.svg not downloade
+    login,resgiter ,logout  @yield('conten')
+    change the Auth Ordner @extende(layouts.auth)
+
+commit 21d0f86c52f11f1e2f80a22f0617d7898108161a
+Author: zwiebelLiu <qin.liu1989@yahoo.de>
+Date:   Sat May 1 14:39:58 2021 +0200
+
+    push in Github'

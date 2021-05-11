@@ -47,26 +47,8 @@
             <div class="card">
                 <div class="card-header"> {{__('List of Tasks')}}</div>
                 <div class="card-body">
-                    <table class="table table-responsive-sm">
-                        <tbody>
-                        @foreach($checklist->task as $tasks)
-                        <tr>
-                            <td>{{$tasks->name}}</td>
-                            <td>
-                                <a class="btn btn-sm btn-primary" href="{{route('admin.checklists.tasks.edit',[$checklist,$tasks])}}">{{__('Edit')}}</a>
-                                <form style="display: inline;" action="{{route('admin.checklists.tasks.destroy',[$checklist,$tasks])}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger"
-                                            onclick="return confirm('{{__('Are u sure?')}}')"
-                                            type="submit">{{__('Delete this Task')}}</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
+                    @livewire('tasks-table',['checklist'=>$checklist])
 
-                        </tbody>
-                    </table>
                 </div>
             </div>
         <div class="card">

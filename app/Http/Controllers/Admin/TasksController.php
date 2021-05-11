@@ -16,7 +16,8 @@ class TasksController extends Controller
 
     public function store(StoreTaskRequest $request,Checklist $checklist) : RedirectResponse
     {
-        $checklist->task()->create($request->validated());
+        $position=$checklist->task()->max('position')+1;
+        $checklist->task()->create($request->validated()+['position'=>$position]);
         return redirect()->route('admin.checklist_group.checklists.edit',
         [$checklist->checklist_group_id,$checklist]);
     }
@@ -36,6 +37,7 @@ class TasksController extends Controller
 
     public function destroy(Checklist $checklist, $tasks):RedirectResponse
     {
+        $checklist->task()->where('position','>',Tasks::find($tasks)->position)->update(['position'=>\DB::raw('position -1')]);
         Tasks::find($tasks)->delete();
         return redirect()->route('admin.checklist_group.checklists.edit',
                                  [$checklist->checklist_group_id,$checklist]);
