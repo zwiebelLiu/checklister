@@ -28,20 +28,7 @@ class StoreChecklistGroupRequest extends FormRequest
         ];
     }
 
-    /**
-     * 配置验证器实例.
-     *
-     * @param  \Illuminate\Validation\Validator  $validator
-     * @return void
-     */
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
 
-                $validator->errors()->add('field', 'Something is wrong with this field!');
-
-        });
-    }
 }
 
 

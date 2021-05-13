@@ -17,16 +17,18 @@ class UserSeeder extends Seeder
     public function run()
     {
         //)) UserFactory::defi();
-       /*
+
         User::create([
             'name'=>'Admin',
              'email'=>'admin@admin.com',
              'password'=>bcrypt('12345678'),
-             'is_admin'=>1
+             'is_admin'=>1,
+            'age'=>10
              ]);
 
-       */
-        DB::table('users')->update(array('age'=>rand(0,30)));
+
+      //  DB::table('users')->update(array('age'=>rand(0,30)));
+        User::factory(3)->create();
 /*
         //User::factory(3)->create();
       //  App\User::all()->random()->id,

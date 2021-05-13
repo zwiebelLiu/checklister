@@ -25,12 +25,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware'=>'auth'],function(){
 
     Route::get('welcome',[PagesController::class,'welcome'])->name('welcome');
     Route::get('consultation',[PagesController::class,'consultation'])->name('consultation');
+    Route::get('checklist/{checklist}',[App\Http\Controllers\User\ChecklistController::class,'show'])->name('user.checklist.show');
    Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'is_admin'],function()
    {
        Route::get('users',[UserController::class,'index'])->name('userlist');
